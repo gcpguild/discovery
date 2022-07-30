@@ -2,7 +2,7 @@ import re, os
 from operator import itemgetter
 from pathlib import Path
 #------------------------------------------------------------------
-basepath = "C:\\google\\serpapi\\indias\\stratozone\\discovey"
+basepath = "C:\\google\\serpapi\\indias\\stratozone\\discovey\\data"
 #-----------------------------------------------------------------
 def mkingdirs(givenlist):
     mymanog = ''.join(givenlist)
