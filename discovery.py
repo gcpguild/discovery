@@ -270,7 +270,8 @@ for i, percentage in enumerate(psutil.cpu_percent(percpu=True, interval=1)):
     fn.append(l1)
     fv.append(percentage)
     c2 = ("{}{}{}".format("Total CPU Usage:", {psutil.cpu_percent()}, "%")) 
-    fn.append('Total_CPU_Usage_percentage')
+    l2 = ("{}{}{}{}".format('Total_CPU_Usage', '_',i,'_percentage'))
+    fn.append(l2)
     fv.append(psutil.cpu_percent())
     cp = c1 + c2
     cpc = ''.join(cp)
