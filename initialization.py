@@ -20,7 +20,7 @@ elif myos == "win32" or myos == "Windows":
     N="\\"    
     basedir = 'C:\\google\\serpapi\\indias\\stratozone\\discovery'  
 #-----------------------------------------------------------------
-basepath = "C:\\google\\serpapi\\indias\\stratozone\\discovery\\data"
+basepath = "C:\\google\\serpapi\\indias\\stratozone\\discovery"
 #--------------------------------------------------------------------
 def mkingdirs(givenlist):
     mymanog = ''.join(givenlist)
