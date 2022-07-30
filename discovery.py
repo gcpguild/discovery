@@ -384,13 +384,12 @@ for interface_name, interface_addresses in if_addrs.items():
     ij1 = ("{}{}".format('Interface_name_', j))
     fn.append(ij1)
     fv.append(interface_name)
-    j += 1
     
     for address in interface_addresses:
         ipa = []
         if str(address.family) == 'AddressFamily.AF_INET':
             i1 = ("{}{}{}".format("IP Address:", {address.address}, ' | '))
-            ik1 = ("{}{}".format('IP_Address_', k))
+            ik1 = ("{}{}{}{}".format('IP_Address_', j, '_', k))
             fn.append(ik1)
             fv.append(address.address)
             i2 = ("{}{}{}".format("Netmask:", {address.netmask}, ' | '))
@@ -411,7 +410,7 @@ for interface_name, interface_addresses in if_addrs.items():
             paty = ''.join(ipa)
             machine.append(paty)
             k += 1
-          
+    j += 1      
 # get IO statistics since boot
 net_io = psutil.net_io_counters()
 m = ("{}{}{}".format("Total Bytes Sent:", {get_size(net_io.bytes_sent)}, ' | '))
