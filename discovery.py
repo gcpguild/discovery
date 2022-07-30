@@ -236,6 +236,8 @@ mymachinelist = ['Last_Boot_Time:',
 s = ''.join(str(x) for x in mymachinelist)
 #-----------------------------------------------------
 machine.append(s)
+fn.append('Machine_Last_Boot_Time')
+fv.append(s)
 #-----------------------------------------------------
 m = ("{}{}".format("CPU_Physical_cores:", psutil.cpu_count(logical=False)))
 machine.append(m)
@@ -398,6 +400,7 @@ for interface_name, interface_addresses in if_addrs.items():
             ik3 = ("{}{}".format('Broadcast_IP_', k))
             fn.append(ik2)
             fv.append(address.broadcast)
+            k += 1
         elif str(address.family) == 'AddressFamily.AF_PACKET':
             i4 = ("{}{}".format("Netmask:", {address.netmask}))
             ik4 = ("{}{}".format('Netmask_AddressFamily_', k))
