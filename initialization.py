@@ -12,7 +12,7 @@ if (myos == "Linux" or myos == "linux2"):
     # linux
     N="/"
     homedirectory = str(Path.home())
-    print(homedirectory)
+
     mylist = [ homedirectory, 'google/serpapi/indias/stratozone/discovery' ]
     basepath = fullyqualifydirs(mylist)
 elif myos == "win32" or myos == "Windows":
