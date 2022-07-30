@@ -55,7 +55,7 @@ machine = []
 #.........................................................................
 import sys
 from subprocess import check_output
-import json, re, csv, xlrd, openpyxl, sys, os
+import json, re, csv, openpyxl, sys, os
 from pathlib import Path
 import pandas as pd
 from subprocess import check_output
