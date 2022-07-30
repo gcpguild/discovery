@@ -378,13 +378,14 @@ machine.append(m)
 # get all network interfaces (virtual and physical)
 if_addrs = psutil.net_if_addrs()
 j = 1
+k = 1
 for interface_name, interface_addresses in if_addrs.items():
    
     ij1 = ("{}{}".format('Interface_name_', j))
     fn.append(ij1)
     fv.append(interface_name)
     j += 1
-    k = 1
+    
     for address in interface_addresses:
         ipa = []
         if str(address.family) == 'AddressFamily.AF_INET':
