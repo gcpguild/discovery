@@ -63,11 +63,11 @@ import platform,socket,re,uuid,json,psutil,logging, platform, cpuinfo, uuid
 from datetime import datetime
 import socket
 
-h_name = socket.gethostname()
-IP_addres = socket.gethostbyname(h_name)
-m = ("{}{}".format("Host Name:", h_name))
+Host_or_Node_or_Machine_or_Env_Name = socket.gethostname()
+IP_Address = socket.gethostbyname(Host_or_Node_or_Machine_or_Env_Name)
+m = ("{}{}".format("Host Name:", Host_or_Node_or_Machine_or_Env_Name))
 machine.append(m)
-m = ("{}{}".format("IP_addres :", IP_addres))
+m = ("{}{}".format("IP address :", IP_Address))
 machine.append(m)
 #-----------------------------------------------------------------------------------------------------
 uname = platform.uname()
