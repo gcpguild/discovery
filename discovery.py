@@ -394,9 +394,9 @@ for interface_name, interface_addresses in if_addrs.items():
             fv.append(address.address)
             i2 = ("{}{}{}".format("Netmask:", {address.netmask}, ' | '))
             ik2 = ("{}{}{}{}".format('Netmask_', j, '_', k))
-           
-            fn.append(ik2)
-            fv.append(address.netmask)
+            if (address.netmask):
+                fn.append(ik2)
+                fv.append(address.netmask)
             i3 = ("{}{}{}".format("Broadcast IP:", {address.broadcast}, ' | '))
             ik3 = ("{}{}".format('Broadcast_IP_', k))
             fn.append(ik2)
