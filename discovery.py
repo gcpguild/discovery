@@ -152,15 +152,29 @@ def getSystemInfo():
     try:
         info={}
         info['platform']=platform.system()
-        
+        fn.append('Machine_platform')
+        fv.append(platform.system())
         info['platform-release']=platform.release()
+        fn.append('Machine_platform-release')
+        fv.append(platform.release())
         info['platform-version']=platform.version()
+        fn.append('Machine_platform-version')
+        fv.append(platform.version())
         info['architecture']=platform.machine()
+        fn.append('Machine_architecture')
+        fv.append(platform.machine())
         info['hostname']=socket.gethostname()
         info['ip-address']=socket.gethostbyname(socket.gethostname())
+        
         info['mac-address']=':'.join(re.findall('..', '%012x' % uuid.getnode()))
+        fn.append('Machine_mac-address')
+        fv.append(':'.join(re.findall('..', '%012x' % uuid.getnode())))
         info['processor']=platform.processor()
+        fn.append('Machine_processor')
+        fv.append(platform.processor())
         info['ram']=str(round(psutil.virtual_memory().total / (1024.0 **3)))+" GB"
+        fn.append('Machine_RAM')
+        fv.append(str(round(psutil.virtual_memory().total / (1024.0 **3)))+" GB")
         return json.dumps(info)
     except Exception as e:
         logging.exception(e)
@@ -236,6 +250,7 @@ mymachinelist = ['Last_Boot_Time:',
 s = ''.join(str(x) for x in mymachinelist)
 #-----------------------------------------------------
 machine.append(s)
+
 #-----------------------------------------------------
 m = ("{}{}".format("CPU_Physical_cores:", psutil.cpu_count(logical=False)))
 machine.append(m)
