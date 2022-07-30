@@ -1,9 +1,27 @@
-import re, os
+import re, os, platform
 from operator import itemgetter
 from pathlib import Path
+#-----------------------------------------------------
+def fullyqualifydirs(mylist):
+    mydircode = N.join(mylist)
+    return mydircode
 #------------------------------------------------------------------
-basepath = "C:\\google\\serpapi\\indias\\stratozone\\discovey\\data"
+myos = platform.system()
+#-----------------------------------------------------
+if (myos == "Linux" or myos == "linux2"):
+    # linux
+    N="/"
+    homedirectory = str(Path.home())
+    print(homedirectory)
+    mylist = [ homedirectory, 'google/serpapi/indias/stratozone/discovery' ]
+    basedir = fullyqualifydirs(mylist)
+elif myos == "win32" or myos == "Windows":
+    # Windows 
+    N="\\"    
+    basedir = 'C:\\google\\serpapi\\indias\\stratozone\\discovery'  
 #-----------------------------------------------------------------
+basepath = "C:\\google\\serpapi\\indias\\stratozone\\discovery\\data"
+#--------------------------------------------------------------------
 def mkingdirs(givenlist):
     mymanog = ''.join(givenlist)
     mk_dir = Path(mymanog)
@@ -13,12 +31,10 @@ def mkingdirs(givenlist):
 workingdir = mkingdirs(basepath)
 os.chdir(workingdir)
 #-------------------------------------------------------------------
-N = "\\"
 cwd = os.getcwd()
 myd = cwd.split(N)
 #-----------------------------------------------------------------
 def getstringswitch(check_string_name):
-  
     dict={
            's0' : myd[0], 
            's1' : myd[1], 
