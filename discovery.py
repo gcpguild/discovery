@@ -8,11 +8,11 @@
     Path        : This program should be placed in the appropriate folder.
     For Windows, the code path is :
     -------------------------------
-        C:\google\serpapi\indias\stratozone\iac\data
+        C:\google\serpapi\indias\stratozone\discovery
         ---------------------------------------------
     For Linux, the code path is :
     -----------------------------
-        $HOME/google/serpapi/indias/stratozone/iac
+        $HOME/google/serpapi/indias/stratozone/discovery
         -------------------------------------------
     Application deployment : Google Cloud adoption in  Infrastructure Modernization 
     
@@ -82,12 +82,12 @@ if (myos == "Linux" or myos == "linux2"):
     N="/"
     homedirectory = str(Path.home())
     print(homedirectory)
-    mylist = [ homedirectory, 'google/serpapi/indias/stratozone/iac' ]
+    mylist = [ homedirectory, 'google/serpapi/indias/stratozone/dicovery' ]
     basedir = fullyqualifydirs(mylist)
 elif myos == "win32" or myos == "Windows":
     # Windows 
     N="\\"    
-    basedir = 'C:\\google\\serpapi\\indias\\stratozone\\iac'  
+    basedir = 'C:\\google\\serpapi\\indias\\stratozone\\discovery'  
 #--------------------------------------------------------------
 if not basedir:
     basedir = os.getcwd()
