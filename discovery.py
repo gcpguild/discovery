@@ -8,11 +8,11 @@
     Path        : This program should be placed in the appropriate folder.
     For Windows, the code path is :
     -------------------------------
-        C:\google\serpapi\indias\discovery
+        C:\google\serpapi\indias\nature-labs\discovery
         ---------------------------------------------
     For Linux, the code path is :
     -----------------------------
-        $HOME/google/serpapi/indias/discovery
+        $HOME/google/serpapi/indias/nature-labs/discovery
         -------------------------------------------
     Application deployment : Google Cloud adoption in  Infrastructure Modernization 
     
