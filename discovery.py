@@ -91,13 +91,13 @@ if (myos == "Linux" or myos == "linux2"):
     homedirectory = str(Path.home())
     print(homedirectory)
     #/google/serpapi/indias/stratozone/discovery/initialization.py
-    mylist = [ homedirectory, 'google/serpapi/indias/stratozone/discovery' ]
+    mylist = [ homedirectory, 'google/serpapi/indias/nature-labs/discovery' ]
     basedir = fullyqualifydirs(mylist)
     print(basedir)
 elif myos == "win32" or myos == "Windows":
     # Windows 
     N="\\"    
-    basedir = 'C:\\google\\serpapi\\indias\\stratozone\\discovery'  
+    basedir = 'C:\\google\\serpapi\\indias\\nature-labs\\discovery'  
 #--------------------------------------------------------------
 if not basedir:
     basedir = os.getcwd()
