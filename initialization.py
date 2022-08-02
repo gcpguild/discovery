@@ -1,6 +1,82 @@
-import re, os, platform
-from operator import itemgetter
+listimports =  [       
+                        'uuid',
+                        'psutil',
+                        'ipaddress'
+]
+
+prepippkgs = [ 'platform', 'logging', 'sys','json','csv', 'os', 'socket', 're',  'pkg_resources']
+
+fromimp_dict_obj = { 'pandas'       :   'pd',  
+                    'pathlib'       :   'Path',
+                    'datetime'      :   'datetime'            
+}
+
+cpu_dict_obj = { 'py-cpuinfo'   :   'cpuinfo' }
+
+#---------------------------------------
+import pkg_resources, re, os, sys, csv, json, socket, platform
 from pathlib import Path
+from itertools import filterfalse
+
+from subprocess import check_output
+
+installedmodules = []
+
+def removen(string):
+    for m in ('\n', '\r'):
+        clean_string = re.sub(m, '', string)
+        clean_string = clean_string.replace(m, '')
+        clean_string = clean_string.rstrip()
+        clean_string = clean_string.strip(m)
+        clean_string = re.sub(m,' ', clean_string)
+        mymano = ''
+        for x in clean_string:
+            mymano += ''+ x
+        return mymano
+
+installed_packages_list = sorted([(i.key) for i in pkg_resources.working_set])
+#-----------------------------------------------
+def tryingmodule(me, modulename):
+    try:    
+        exec(me)
+    except ImportError as e:
+        os.system('pip3 install ' + modulename)
+#----------------------------------------------
+requiredimportmodules = []
+for impmod, aliasmod in fromimp_dict_obj.items():
+    requiredimportmodules.append(impmod)
+    if (impmod == 'pandas'):
+        me = ("{} {} {} {}".format('import', impmod, 'as', aliasmod ))
+    else:
+        me = ("{} {} {} {}".format('from', impmod, 'import', aliasmod ))
+
+    tryingmodule(me = me, modulename = impmod)
+
+
+for e in listimports:
+    requiredimportmodules.append(e)
+    me = ("{} {}".format('import', e))
+
+    tryingmodule(me = me, modulename = e)
+
+for cpukey, cpuvalue in cpu_dict_obj.items():
+    requiredimportmodules.append(cpukey)
+    me = ("{} {}".format('import', cpuvalue ))
+    tryingmodule(me = me, modulename = cpukey)
+
+missingmodules = []
+
+alreadyinstalled = []
+for r in requiredimportmodules:
+    if r in set(installed_packages_list):
+        alreadyinstalled.append(r)
+    else:
+        missingmodules.append(r)
+
+for f in list(filterfalse(set(installed_packages_list).__contains__, requiredimportmodules)):
+    install_missing_packages = removen(f)
+    os.system('pip3 install ' + install_missing_packages)
+
 #-----------------------------------------------------
 def fullyqualifydirs(mylist):
     mydircode = N.join(mylist)
