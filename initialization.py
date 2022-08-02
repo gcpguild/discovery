@@ -13,12 +13,12 @@ if (myos == "Linux" or myos == "linux2"):
     N="/"
     homedirectory = str(Path.home())
 
-    mylist = [ homedirectory, 'google/serpapi/indias/stratozone/discovery' ]
+    mylist = [ homedirectory, 'google/serpapi/indias/discovery' ]
     basepath = fullyqualifydirs(mylist)
 elif myos == "win32" or myos == "Windows":
     # Windows 
     N="\\"    
-    basepath = 'C:\\google\\serpapi\\indias\\stratozone\\discovery'  
+    basepath = 'C:\\google\\serpapi\\indias\\discovery'  
 #-----------------------------------------------------------------
 def mkingdirs(givenlist):
     mymanog = ''.join(givenlist)
