@@ -8,11 +8,11 @@
     Path        : This program should be placed in the appropriate folder.
     For Windows, the code path is :
     -------------------------------
-        C:\google\serpapi\indias\stratozone\discovery
+        C:\google\serpapi\indias\discovery
         ---------------------------------------------
     For Linux, the code path is :
     -----------------------------
-        $HOME/google/serpapi/indias/stratozone/discovery
+        $HOME/google/serpapi/indias/discovery
         -------------------------------------------
     Application deployment : Google Cloud adoption in  Infrastructure Modernization 
     
