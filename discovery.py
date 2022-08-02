@@ -40,6 +40,9 @@
     CPU Info   : Returns the CPU info by using the best sources of information for your OS. Returns the result in a json string
     Generate the Google Big Query for the compute engine for performance
     Written by Kyndryl for project location in Nature Labs Project
+    import socket
+    # Return a list of network interface information
+    socket.if_nameindex()
     Author : ramamurthy.valavandan@kyndryl.com
     gcloud components 
 """
@@ -51,7 +54,6 @@ machine_data_dict_obj = {'Machine_Data':'json',
             'Environment_Data':'txt'} 
 
 machine = []
-
 #.........................................................................
 import sys
 from subprocess import check_output
@@ -61,10 +63,7 @@ import pandas as pd
 from subprocess import check_output
 import platform,socket,re,uuid,json,psutil,logging, platform, cpuinfo, uuid
 from datetime import datetime
-import socket
-# Import libraries
-import netifaces
-import ipaddress
+import socket, ipaddress
 #-----------------------------------------------------------------------
 fn = []
 fv = []
@@ -105,7 +104,6 @@ if not basedir:
 #-----------------------------------------------------------------------------------------------------
 mylist = [basedir, 'initialization.py']
 initialdirectoryconfig = fullyqualifydirs(mylist)
-
 #--------------------------------------------------------------------------------------------------
 def conliststr(myip,sep,ff):
     jfname = sep.join(str(x) for x in myip)
@@ -185,8 +183,6 @@ machinejson = getSystemInfo()
 cpuinfojson = json.loads(cpuinfo.get_cpu_info_json())
 #-----------------------------------------------------
 envinfojson = json.dumps(dict(os.environ))
-#-----------------------------------------------------
-#print(envinfojson)
 #-----------------------------------------------------
 def get_size(bytes, suffix="B"):
     """
@@ -292,6 +288,20 @@ for i, percentage in enumerate(psutil.cpu_percent(percpu=True, interval=1)):
     cpc = ''.join(cp)
     machine.append(cpc)
 #----------------------------------------------------------------------------
+#----------------------------------------------------------
+cpukeys = ['brand_raw', 'vendor_id_raw', 'arch_string_raw', 'arch', 'bits', 'count', 'model', 'hz_advertised_friendly',  'hz_actual_friendly', 'hz_actual', 'l2_cache_size', 'stepping', 'model',  'family', 'l3_cache_size' ]
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+for c in cpukeys:
+    cpk = []
+    for  i, (k, v) in enumerate(cpuinfo.get_cpu_info().items()):
+        if (c ==  k):
+            vk = ("{}{}{}{}".format('CPU ', k, ': ', v))
+            machine.append(vk)
+            vi = ("{}{}".format('CPU_', k))
+            fn.append(vi)
+            fv.append(v)
+#----------------------------------------------------------
+
 svmem = psutil.virtual_memory()
 m = ("{}{}".format("Total virtual_memory:", {get_size(svmem.total)}))
 machine.append(m)
@@ -333,7 +343,6 @@ machine.append(m)
 # Disk Information
 #------------------------------------------------------------------------------
 # get all disk partitions
-
 partitions = psutil.disk_partitions()
 i = 1
 for partition in partitions:
@@ -444,39 +453,21 @@ m = ("{}{}".format("IPv6Network_hostmask:", {ipaddress.IPv6Network("::/112").hos
 machine.append(m)
 fn.append('IPv6Network_hostmask')
 fv.append(ipaddress.IPv6Network("::/112").hostmask)
-#----------------------------------------------------------
-m = ("{}{}".format("Gateway:", netifaces.gateways()))
-machine.append(m)
-fn.append('Gateway')
-fv.append(netifaces.gateways())
-# Getting interfaces
-interfaces = netifaces.interfaces()
-
-# Showing interfaces
-r = 1
-for i in range(0,len(interfaces)):
-    ifc = []
-    # Getting interface status
-    addrs = netifaces.ifaddresses(str(interfaces[i]))
-    m = ("{}{}".format("netifaces_ifaddresses:", addrs))
-    machine.append(m)
-    ii = ("{}{}".format('netifaces_ifaddresses_', r))
-    fn.append(ii)
-    fv.append(addrs)
-    r += 1
-#----------------------------------------------------------
-cpukeys = ['brand_raw', 'vendor_id_raw', 'arch_string_raw', 'arch', 'bits', 'count', 'model', 'hz_advertised_friendly',  'hz_actual_friendly', 'hz_actual', 'l2_cache_size', 'stepping', 'model',  'family', 'l3_cache_size' ]
-#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-for c in cpukeys:
-    cpk = []
-    for  i, (k, v) in enumerate(cpuinfo.get_cpu_info().items()):
-        if (c ==  k):
-            vk = ("{}{}{}{}".format('CPU ', k, ': ', v))
-            machine.append(vk)
-            vi = ("{}{}".format('CPU_', k))
-            fn.append(vi)
-            fv.append(v)
-#----------------------------------------------------------
+p = ';'
+for  i, (k, v) in enumerate(os.environ.items()):
+    
+    result = re.search(p, v)
+    if result:
+        pv = [ re.sub(p, '\n', v) ]
+        av = [x for x in v.split(p)]
+        for e in range (0, len(av)):
+            a = ("{}{}{}".format(k, '_', e))
+            fn.append(a)
+            fv.append(av[e])
+    else:
+        fn.append(k)
+        fv.append(v)
+#-----------------------------------------------------
 df1 = pd.DataFrame([machinejson])
 df2 = pd.DataFrame([cpuinfojson])
 df3 = pd.DataFrame([envinfojson])
