@@ -250,12 +250,12 @@ machine.append(s)
 #-----------------------------------------------------
 m = ("{}{}".format("CPU_Physical_cores:", psutil.cpu_count(logical=False)))
 machine.append(m)
-fn.append('CPU_Physical_cores')
+fn.append('CPU_Physical_cores_count')
 fv.append(psutil.cpu_count(logical=False))
 #---------------------------------------------------------------------
 m = ("{}{}".format("CPU Total cores:", psutil.cpu_count(logical=True)))
 machine.append(m)
-fn.append('CPU_Physical_cores')
+fn.append('CPU_Physical_Total_cores_count')
 fv.append(psutil.cpu_count(logical=True))
 #--------------------------------------------------------------------
 # CPU frequencies
